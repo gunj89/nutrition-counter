@@ -26,6 +26,21 @@
     </div>
   </section>
 
+    <section class="card">
+    <h2>Add to this day</h2>
+    <label for="pick">Food</label>
+    <select id="pick"></select>
+    <label for="qty" style="margin-top:10px" id="qtyLabel">Quantity</label>
+    <input id="qty" type="number" min="0" step="any" inputmode="decimal" value="1">
+    <div class="chips" id="chips"></div>
+    <p class="sub" id="preview"></p>
+    <button class="btn" id="addLog">Add to list</button>
+
+    <h2 style="margin-top:20px">Today's list</h2>
+    <ul id="logList"></ul>
+    <div style="margin-top:10px;display:flex;justify-content:flex-end"><button class="ghost" id="clearDay">Clear this day</button></div>
+  </section>
+
   <section class="card">
     <h2>Add a food to your list</h2>
     <label for="fname">Food name</label>
@@ -49,21 +64,6 @@
       <summary>My foods (<span id="fcount">0</span>)</summary>
       <ul id="foodList"></ul>
     </details>
-  </section>
-
-  <section class="card">
-    <h2>Add to this day</h2>
-    <label for="pick">Food</label>
-    <select id="pick"></select>
-    <label for="qty" style="margin-top:10px" id="qtyLabel">Quantity</label>
-    <input id="qty" type="number" min="0" step="any" inputmode="decimal" value="1">
-    <div class="chips" id="chips"></div>
-    <p class="sub" id="preview"></p>
-    <button class="btn" id="addLog">Add to list</button>
-
-    <h2 style="margin-top:20px">Today's list</h2>
-    <ul id="logList"></ul>
-    <div style="margin-top:10px;display:flex;justify-content:flex-end"><button class="ghost" id="clearDay">Clear this day</button></div>
   </section>
 </main>
 
