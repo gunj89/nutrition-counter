@@ -1,0 +1,17 @@
+{
+  "name": "Nutrition Counter",
+  "short_name": "Nutrition",
+  "description": "Track calories, protein, carbs, fiber and fat.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#eef3ec",
+  "theme_color": "#17301f",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./icons/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

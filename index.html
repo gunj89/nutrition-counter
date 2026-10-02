@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nutrition Counter</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#17301f">
+</head>
+<body>
+<main>
+  <header class="wide">
+    <h1>Nutrition Counter</h1>
+    <div style="width:170px"><label for="date">Day</label><input type="date" id="date"></div>
+  </header>
+
+  <section class="card hero wide" aria-live="polite">
+    <div class="cal"><span id="tCal">0</span><small>kcal / 2000 kcal</small></div>
+    <div class="macros">
+      <div><b id="tP">0</b><span>Protein g / 130 g</span></div>
+      <div><b id="tC">0</b><span>Carbs g / 200 g</span></div>
+      <div><b id="tFi">0</b><span>Fiber g / 25 g</span></div>
+      <div><b id="tF">0</b><span>Fat g / 60 g</span></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Add a food to your list</h2>
+    <label for="fname">Food name</label>
+    <input id="fname" placeholder="e.g. Banana, Moong dal">
+    <label style="margin-top:10px">Nutrition values are for</label>
+    <div class="seg" id="modeSeg">
+      <button type="button" data-m="piece" class="on">1 piece</button>
+      <button type="button" data-m="gram">100 grams</button>
+    </div>
+    <div class="grid">
+      <div><label for="fcal">Calories</label><input id="fcal" type="number" min="0" step="any" inputmode="decimal"></div>
+      <div><label for="fp">Protein (g)</label><input id="fp" type="number" min="0" step="any" inputmode="decimal"></div>
+      <div><label for="fc">Carbs (g)</label><input id="fc" type="number" min="0" step="any" inputmode="decimal"></div>
+      <div><label for="ffi">Fiber (g)</label><input id="ffi" type="number" min="0" step="any" inputmode="decimal"></div>
+      <div><label for="ff">Fat (g)</label><input id="ff" type="number" min="0" step="any" inputmode="decimal"></div>
+    </div>
+    <button class="btn" id="saveFood">Save food</button>
+    <p class="sub" id="fmsg" role="status"></p>
+
+    <details style="margin-top:12px">
+      <summary>My foods (<span id="fcount">0</span>)</summary>
+      <ul id="foodList"></ul>
+    </details>
+  </section>
+
+  <section class="card">
+    <h2>Add to this day</h2>
+    <label for="pick">Food</label>
+    <select id="pick"></select>
+    <label for="qty" style="margin-top:10px" id="qtyLabel">Quantity</label>
+    <input id="qty" type="number" min="0" step="any" inputmode="decimal" value="1">
+    <div class="chips" id="chips"></div>
+    <p class="sub" id="preview"></p>
+    <button class="btn" id="addLog">Add to list</button>
+
+    <h2 style="margin-top:20px">Today's list</h2>
+    <ul id="logList"></ul>
+    <div style="margin-top:10px;display:flex;justify-content:flex-end"><button class="ghost" id="clearDay">Clear this day</button></div>
+  </section>
+</main>
+
+<script src="script/script.js"></script>
+
+<script>
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("./service-worker.js")
+                .then(() => {
+                    console.log("Service Worker registered successfully.");
+                })
+                .catch(error => {
+                    console.error("Service Worker registration failed:", error);
+                });
+        });
+    }
+</script>
+</body>
+</html>
