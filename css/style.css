@@ -38,3 +38,10 @@ li.row:first-child{border-top:0}
 .empty{color:var(--mute);font-size:.9rem;padding:8px 0}
 .scroll{overflow-x:auto}
 details summary{cursor:pointer;font-weight:600}
+#foodSearch {
+    margin-bottom: 8px;
+}
+
+#foodSearch::placeholder {
+    color: var(--mute);
+}

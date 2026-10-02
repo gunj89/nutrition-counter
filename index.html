@@ -28,8 +28,16 @@
 
     <section class="card">
     <h2>Add to this day</h2>
-    <label for="pick">Food</label>
-    <select id="pick"></select>
+<label for="foodSearch">Search food</label>
+<input
+    id="foodSearch"
+    type="search"
+    placeholder="Search food..."
+    autocomplete="off"
+>
+
+<label for="pick" style="margin-top:10px">Food</label>
+<select id="pick"></select>
     <label for="qty" style="margin-top:10px" id="qtyLabel">Quantity</label>
     <input id="qty" type="number" min="0" step="any" inputmode="decimal" value="1">
     <div class="chips" id="chips"></div>

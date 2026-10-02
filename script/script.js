@@ -35,20 +35,42 @@
     save(KF,foods);
     ['fname','fcal','fp','fc','ffi','ff'].forEach(function(i){$(i).value=''});
     $('fmsg').textContent=name+' saved. Pick it from the list on the right.';
+    $('foodSearch').value='';
     renderFoods();$('pick').value=foods[foods.length-1].id;updateQtyUI();
   });
 
   function renderFoods(){
-    var sel=$('pick'),cur=sel.value;
-    sel.innerHTML=foods.length?foods.map(function(f){
-      return '<option value="'+f.id+'">'+esc(f.name)+' ('+(f.mode==='piece'?'per piece':'per 100 g')+')</option>'}).join(''):'<option value="">No foods yet</option>';
-    if(cur&&foods.some(function(f){return f.id===cur}))sel.value=cur;
+    var sel=$('pick');
+    var selectedId=sel.value;
+    var words=$('foodSearch').value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+
+    // every typed word must appear somewhere in the food name
+    var filtered=foods.filter(function(f){
+      var n=f.name.toLowerCase();
+      return words.every(function(w){return n.indexOf(w)!==-1});
+    });
+
+    sel.innerHTML=filtered.length
+      ? filtered.map(function(f){
+          return '<option value="'+f.id+'">'+esc(f.name)+' ('+(f.mode==='piece'?'per piece':'per 100 g')+')</option>';
+        }).join('')
+      : '<option value="">No matching foods</option>';
+
+    // keep the current food if it is still in the results, otherwise pick the first match
+    if(filtered.some(function(f){return f.id===selectedId})){
+      sel.value=selectedId;
+    }else if(filtered.length){
+      sel.selectedIndex=0;
+    }
+
     $('fcount').textContent=foods.length;
     $('foodList').innerHTML=foods.map(function(f){
-      return '<li class="row"><div><div class="nm">'+esc(f.name)+'</div><div class="sub">'+f.cal+' kcal · P '+f.p+' · C '+f.c+' · Fi '+f.fi+' · F '+f.f+' / '+(f.mode==='piece'?'piece':'100 g')+'</div></div><button class="x" data-del="'+f.id+'" aria-label="Delete '+esc(f.name)+'">×</button></li>'}).join('')||'<li class="empty">Nothing saved yet.</li>';
+      return '<li class="row"><div><div class="nm">'+esc(f.name)+'</div><div class="sub">'+f.cal+' kcal · P '+f.p+' · C '+f.c+' · Fi '+f.fi+' · F '+f.f+' / '+(f.mode==='piece'?'piece':'100 g')+'</div></div><button class="x" data-del="'+f.id+'" aria-label="Delete '+esc(f.name)+'">×</button></li>';
+    }).join('')||'<li class="empty">Nothing saved yet.</li>';
+
     updateQtyUI();
   }
-
+  $('foodSearch').addEventListener('input',renderFoods);
   $('foodList').addEventListener('click',function(e){
     var id=e.target.dataset.del;if(!id)return;
     foods=foods.filter(function(f){return f.id!==id});save(KF,foods);renderFoods();
